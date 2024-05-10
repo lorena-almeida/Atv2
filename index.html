@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação de Datas em JavaScript</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+    <link rel="shortcut icon" href="unicesumar.png" type="image/x-icon" />
+</head>
+<body>
+    <header class="cabecalho">
+    <h1>Atividade 2 - Lorena Almeida
+        RA 23167573-2
+    </h1>
+    </header>
+
+    <label for="data1">Digite a primeira data:</label>
+    <input type="date" id="data1">
+
+    <label for="data2">Digite a segunda data:</label>
+    <input type="date" id="data2">
+
+    <button onclick="MaiorData()">Calcular Maior Data</button>
+    <p id="resultadoMaiorData"></p>
+
+    <button onclick="Intervalo()">Calcular Intervalo</button>
+    <p id="resultadoIntervalo"></p>
+
+    <button onclick="DataAtual()">Mostrar Data Atual</button>
+    <p id="resultadoDataAtual"></p>
+
+    <script>
+        function MaiorData() {
+            const data1 = new Date(document.getElementById('data1').value);
+            const data2 = new Date(document.getElementById('data2').value);
+            const resultado = data1 > data2 ? data1 : data2;
+            document.getElementById('resultadoMaiorData').innerText = `A maior data é: ${resultado}`;
+        }
+
+        function Intervalo() {
+            const dataAntiga = new Date(document.getElementById('data1').value);
+            const dataRecente = new Date(document.getElementById('data2').value);
+            
+            if (dataAntiga > dataRecente) {
+                document.getElementById('resultadoIntervalo').innerText = "A primeira data deve ser mais antiga que a segunda!";
+            } else {
+                const intervaloMS = dataRecente.getTime() - dataAntiga.getTime();
+                const intervaloDias = Math.floor(intervaloMS / (1000 * 60 * 60 * 24));
+                document.getElementById('resultadoIntervalo').innerText = `Intervalo de dias: ${intervaloDias}`;
+            }
+        }
+
+        function DataAtual() {
+            const dataAtual = new Date();
+            const hora = String(dataAtual.getHours()).padStart(2, '0');
+            const minuto = String(dataAtual.getMinutes()).padStart(2, '0');
+            const dia = String(dataAtual.getDate()).padStart(2, '0');
+            const mes = String(dataAtual.getMonth() + 1).padStart(2, '0'); 
+            const ano = dataAtual.getFullYear();
+            
+            const resultado = `${hora}:${minuto} - ${dia}/${mes}/${ano}`;
+            document.getElementById('resultadoDataAtual').innerText = `Data atual: ${resultado}`;
+        }
+    </script>
+</body>
+</html>
